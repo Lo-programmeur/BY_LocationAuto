@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BY_LocationAuto - Location de Voitures à Libreville</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS personnalisé -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="BY_LocationAuto" class="logo-img me-2">
+                    <span class="logo-text">BY_LocationAuto</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vehicles">Véhicules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-sign-in-alt me-1"></i>Connexion
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <i class="fas fa-user-plus me-1"></i>Inscription
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content text-white">
+                        <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">
+                            Location de Voitures de Luxe à <span class="text-warning">Libreville</span>
+                        </h1>
+                        <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                            Découvrez notre flotte moderne de véhicules haut de gamme pour tous vos déplacements au Gabon. Service professionnel et tarifs compétitifs garantis.
+                        </p>
+                        <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                            <button class="btn btn-warning btn-lg me-3" onclick="scrollToSection('vehicles')">
+                                <i class="fas fa-car me-2"></i>Voir nos véhicules
+                            </button>
+                            <button class="btn btn-outline-light btn-lg" onclick="scrollToSection('contact')">
+                                <i class="fas fa-phone me-2"></i>Nous contacter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="hero-form-container animate__animated animate__fadeInRight animate__delay-1s">
+                        <div class="card shadow-lg border-0">
+                            <div class="card-body p-4">
+                                <h3 class="card-title text-center mb-4 text-primary">
+                                    <i class="fas fa-calendar-check me-2"></i>Réservation Rapide
+                                </h3>
+                                <form id="quickBookingForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Date de début</label>
+                                            <input type="date" class="form-control" id="startDate" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Date de fin</label>
+                                            <input type="date" class="form-control" id="endDate" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Type de véhicule</label>
+                                        <select class="form-select" id="vehicleType" required>
+                                            <option value="">Choisir un type</option>
+                                            <option value="economique">Économique</option>
+                                            <option value="berline">Berline</option>
+                                            <option value="suv">SUV</option>
+                                            <option value="luxe">Luxe</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Lieu de prise en charge</label>
+                                        <select class="form-select" id="pickupLocation" required>
+                                            <option value="">Choisir un lieu</option>
+                                            <option value="aeroport">Aéroport Léon-Mba</option>
+                                            <option value="centre-ville">Centre-ville Libreville</option>
+                                            <option value="port-gentil">Port-Gentil</option>
+                                            <option value="franceville">Franceville</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg">
+                                        <i class="fas fa-search me-2"></i>Rechercher
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary mb-3">Nos Services</h2>
+                    <p class="lead">Des solutions de location adaptées à tous vos besoins au Gabon</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-car-side text-primary fs-1"></i>
+                            </div>
+                            <h5 class="card-title">Location Courte Durée</h5>
+                            <p class="card-text">Parfait pour vos déplacements quotidiens, sorties et weekends à Libreville et environs.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Tarifs horaires et journaliers</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Assurance incluse</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Kilométrage illimité en ville</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-calendar-week text-primary fs-1"></i>
+                            </div>
+                            <h5 class="card-title">Location Longue Durée</h5>
+                            <p class="card-text">Solutions économiques pour vos besoins professionnels et séjours prolongés au Gabon.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Tarifs dégressifs</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Maintenance incluse</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Véhicule de remplacement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-user-tie text-primary fs-1"></i>
+                            </div>
+                            <h5 class="card-title">Location avec Chauffeur</h5>
+                            <p class="card-text">Service VIP avec chauffeurs professionnels pour vos déplacements d'affaires.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Chauffeurs expérimentés</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Connaissance locale</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Disponible 24h/24</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                    <div class="about-content">
+                        <h2 class="display-5 fw-bold text-primary mb-4">À propos de BY_LocationAuto</h2>
+                        <p class="lead mb-4">
+                            Depuis notre création, BY_LocationAuto s'impose comme le leader de la location de véhicules 
+                            au Gabon. Basés à Libreville, nous offrons nos services dans tout le pays avec une flotte 
+                            moderne et diversifiée.
+                        </p>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-shield-alt text-primary fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Assurance Premium</h6>
+                                        <small class="text-muted">Couverture complète incluse</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-clock text-primary fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Service 24h/24</h6>
+                                        <small class="text-muted">Support client permanent</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-map-marked-alt text-primary fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Couverture Nationale</h6>
+                                        <small class="text-muted">Présent dans tout le Gabon</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-tools text-primary fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Maintenance Régulière</h6>
+                                        <small class="text-muted">Véhicules toujours au top</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stats-row">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="text-primary fw-bold">500+</h3>
+                                        <small class="text-muted">Véhicules</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="text-primary fw-bold">5000+</h3>
+                                        <small class="text-muted">Clients Satisfaits</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="text-primary fw-bold">10+</h3>
+                                        <small class="text-muted">Années d'expérience</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="BY_LocationAuto Libreville" class="img-fluid rounded shadow-lg">
+                        <div class="image-overlay">
+                            <div class="overlay-content text-center text-white">
+                                <h4 class="fw-bold">Votre partenaire mobilité au Gabon</h4>
+                                <p class="mb-0">Des solutions adaptées à vos besoins</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary mb-3">Contactez-nous</h2>
+                    <p class="lead">Besoin d'informations ou d'un devis personnalisé ? Notre équipe est à votre écoute.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-4">
+                                <i class="fas fa-envelope text-primary me-2"></i>
+                                Envoyez-nous un message
+                            </h5>
+                            <form id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nom complet *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Téléphone</label>
+                                        <input type="tel" class="form-control" placeholder="+241...">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Sujet</label>
+                                        <select class="form-select">
+                                            <option value="">Choisir un sujet</option>
+                                            <option value="reservation">Nouvelle réservation</option>
+                                            <option value="devis">Demande de devis</option>
+                                            <option value="info">Informations générales</option>
+                                            <option value="reclamation">Réclamation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message *</label>
+                                    <textarea class="form-control" rows="5" required 
+                                              placeholder="Décrivez votre demande..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Envoyer le message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="contact-info">
+                        <div class="card border-0 shadow mb-4">
+                            <div class="card-body text-center p-4">
+                                <i class="fas fa-map-marker-alt text-primary fs-1 mb-3"></i>
+                                <h6>Adresse</h6>
+                                <p class="text-muted mb-0">Quartier Nzeng-Ayong Nouvelle cité<br>Libreville, Gabon</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow mb-4">
+                            <div class="card-body text-center p-4">
+                                <i class="fas fa-phone text-primary fs-1 mb-3"></i>
+                                <h6>Téléphone</h6>
+                                <p class="text-muted mb-0">+241 77 14 52 25<br>+241 62 24 95 00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow mb-4">
+                            <div class="card-body text-center p-4">
+                                <i class="fas fa-envelope text-primary fs-1 mb-3"></i>
+                                <h6>Email</h6>
+                                <p class="text-muted mb-0">contact@bylocationauto.ga<br>reservations@bylocationauto.ga</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow">
+                            <div class="card-body text-center p-4">
+                                <i class="fas fa-clock text-primary fs-1 mb-3"></i>
+                                <h6>Horaires</h6>
+                                <p class="text-muted mb-0">Lun - Dim<br>6h00 - 22h00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Témoignages -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary mb-3">Témoignages Clients</h2>
+                    <p class="lead">Ce que disent nos clients satisfaits de BY_LocationAuto</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Service impeccable ! J'ai loué une Toyota Land Cruiser pour un voyage à Franceville. 
+                            Le véhicule était en parfait état et l'équipe très professionnelle."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user-circle text-primary"></i>
+                            </div>
+                            <div class="author-info">
+                                <h6>Basile-Yonel</h6>
+                                <small class="text-muted">Programmeur</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Excellent rapport qualité-prix ! J'utilise BY_LocationAuto depuis 2 ans pour mes déplacements 
+                            professionnels. Toujours satisfait du service."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user-circle text-primary"></i>
+                            </div>
+                            <div class="author-info">
+                                <h6>Joel MOUTEMA.</h6>
+                                <small class="text-muted">Etudiant à l'UNG</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Service client au top ! Panne en route vers l'aéroport, ils m'ont envoyé un véhicule 
+                            de remplacement en moins d'une heure. Merci BY_LocationAuto !"
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user-circle text-primary"></i>
+                            </div>
+                            <div class="author-info">
+                                <h6>Patrick N.</h6>
+                                <small class="text-muted">Médecin, Libreville</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section FAQ -->
+    <section id="faq" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary mb-3">Questions Fréquentes</h2>
+                    <p class="lead">Trouvez rapidement des réponses à vos questions</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Quels documents sont nécessaires pour louer une voiture ?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Pour louer un véhicule chez BY_LocationAuto, vous devez présenter :
+                                    <ul class="mt-2">
+                                        <li>Une pièce d'identité valide (CNI, passeport)</li>
+                                        <li>Un permis de conduire valide (depuis au moins 2 ans)</li>
+                                        <li>Une preuve de domicile</li>
+                                        <li>Une carte de crédit ou espèces pour le dépôt de garantie</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Quelle est la politique d'annulation ?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Vous pouvez annuler gratuitement votre réservation jusqu'à 48 heures avant la date de prise en charge.
+                                    Au-delà de ce délai, des frais d'annulation de 30% du montant total seront appliqués.
+                                    En cas de non-présentation, le montant total de la réservation sera retenu.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    L'assurance est-elle incluse dans le prix ?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Oui, tous nos tarifs incluent une assurance responsabilité civile et une assurance tous risques
+                                    avec une franchise. Vous pouvez souscrire à une assurance complémentaire sans franchise pour
+                                    une protection maximale moyennant un supplément.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Puis-je conduire le véhicule en dehors de Libreville ?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Oui, vous pouvez conduire nos véhicules dans tout le Gabon. Nous disposons d'agences à Libreville,
+                                    Port-Gentil et Franceville. Pour les voyages transfrontaliers, veuillez nous consulter au préalable
+                                    car des conditions spéciales s'appliquent.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Quels sont les modes de paiement acceptés ?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Nous acceptons plusieurs modes de paiement :
+                                    <ul class="mt-2">
+                                        <li>Espèces (FCFA)</li>
+                                        <li>Cartes bancaires (Visa, Mastercard)</li>
+                                        <li>Mobile Money (Airtel Money, Moov Money)</li>
+                                        <li>Virement bancaire pour les entreprises</li>
+                                    </ul>
+                                    Un acompte de 30% est demandé à la réservation, le solde étant dû à la prise en charge du véhicule.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Que faire en cas de panne ou d'accident ?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    En cas de panne ou d'accident :
+                                    <ol class="mt-2">
+                                        <li>Contactez immédiatement notre service d'assistance 24h/24 au +241 01 23 45 67</li>
+                                        <li>En cas d'accident, établissez un constat amiable si possible</li>
+                                        <li>Prévenez les autorités compétentes si nécessaire</li>
+                                        <li>Ne quittez pas les lieux avant l'arrivée de nos équipes</li>
+                                    </ol>
+                                    Nous intervenons rapidement partout au Gabon pour vous assister.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Véhicules -->
+    <section id="vehicles" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary mb-3">Notre Flotte</h2>
+                    <p class="lead">Des véhicules modernes et bien entretenus pour tous vos trajets</p>
+                </div>
+            </div>
+            
+            <!-- Filtres des véhicules -->
+            <div class="row mb-4">
+                <div class="col-lg-6 mx-auto">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="btn-group w-100" role="group" id="vehicleFilters">
+                                <input type="radio" class="btn-check" name="vehicleFilter" id="all" value="all" checked>
+                                <label class="btn btn-outline-primary" for="all">Tous</label>
+                                
+                                <input type="radio" class="btn-check" name="vehicleFilter" id="economique" value="economique">
+                                <label class="btn btn-outline-primary" for="economique">Économique</label>
+                                
+                                <input type="radio" class="btn-check" name="vehicleFilter" id="berline" value="berline">
+                                <label class="btn btn-outline-primary" for="berline">Berline</label>
+                                
+                                <input type="radio" class="btn-check" name="vehicleFilter" id="suv" value="suv">
+                                <label class="btn btn-outline-primary" for="suv">SUV</label>
+                                
+                                <input type="radio" class="btn-check" name="vehicleFilter" id="luxe" value="luxe">
+                                <label class="btn btn-outline-primary" for="luxe">Luxe</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Galerie des véhicules -->
+            <div class="row g-4" id="vehicleGallery">
+                <!-- Les véhicules seront chargés dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Connexion -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="loginEmail" autocomplete="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mot de passe</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" id="loginPassword" autocomplete="current-password" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                        </button>
+                        <div class="text-center">
+                            <a href="#" class="text-decoration-none">Mot de passe oublié ?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Inscription -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>Créer un compte
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Prénom</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="firstName" autocomplete="given-name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nom</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="lastName" autocomplete="family-name" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="registerEmail" autocomplete="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Téléphone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+241..." autocomplete="tel" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date de naissance</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    <input type="date" class="form-control" id="birthDate" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Adresse</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                <input type="text" class="form-control" id="address" autocomplete="street-address" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mot de passe</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="registerPassword" autocomplete="new-password" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirmer le mot de passe</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="confirmPassword" autocomplete="new-password" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="acceptTerms" required>
+                            <label class="form-check-label" for="acceptTerms">
+                                J'accepte les <a href="#" class="text-decoration-none">conditions d'utilisation</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-user-plus me-2"></i>Créer mon compte
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/logo.png" alt="BY_LocationAuto" class="footer-logo me-2">
+                        <h5 class="mb-0 text-white">BY_LocationAuto</h5>
+                    </div>
+                    <p class="mb-3">Votre partenaire de confiance pour la location de véhicules de qualité à Libreville et dans tout le Gabon.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fs-5"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fs-5"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-whatsapp fs-5"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fs-5"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-warning mb-3">Informations</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-light text-decoration-none">À propos</a></li>
+                        <li><a href="#faq" class="text-light text-decoration-none">FAQ</a></li>
+                        <li><a href="conditions.html" class="text-light text-decoration-none">Conditions générales</a></li>
+                        <li><a href="#contact" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-warning mb-3">Véhicules</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">Économique</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Berline</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">SUV</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Luxe</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h6 class="text-warning mb-3">Contact</h6>
+                    <div class="contact-info">
+                        <div class="mb-2">
+                            <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                            Quartier Nzeng-Ayong Nouvelle cité, Libreville, Gabon
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-phone text-primary me-2"></i>
+                            +241 77 14 52 25
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-envelope text-primary me-2"></i>
+                            basile.technology@gmail.com
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-clock text-primary me-2"></i>
+                            Lun - Dim: 6h00 - 22h00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 BY_LocationAuto. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">
+                        <i class="fas fa-code me-1"></i>
+                        Développé par <span class="text-warning fw-bold">Basile lo Programmeur</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript personnalisé -->
+    <script src="js/main.js"></script>
+</body>
+</html>

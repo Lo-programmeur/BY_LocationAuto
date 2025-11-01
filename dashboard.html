@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - BY_LocationAuto</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CSS personnalisé -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="BY_LocationAuto" class="logo-img me-2">
+                    <span class="logo-text">BY_LocationAuto</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="userName">Mon Compte</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showSection('profile')">
+                                <i class="fas fa-user me-2"></i>Mon Profil
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSection('bookings')">
+                                <i class="fas fa-calendar-alt me-2"></i>Mes Réservations
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h5><i class="fas fa-tachometer-alt me-2"></i>Tableau de Bord</h5>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active" onclick="showSection('overview')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Vue d'ensemble</span>
+                </li>
+                <li class="menu-item" onclick="showSection('bookings')">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Mes Réservations</span>
+                    <span class="badge bg-primary" id="bookingsCount">0</span>
+                </li>
+                <li class="menu-item" onclick="showSection('profile')">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Mon Profil</span>
+                </li>
+                <li class="menu-item" onclick="showSection('favorites')">
+                    <i class="fas fa-heart"></i>
+                    <span>Favoris</span>
+                </li>
+                <li class="menu-item" onclick="showSection('history')">
+                    <i class="fas fa-history"></i>
+                    <span>Historique</span>
+                </li>
+                <li class="menu-item" onclick="showSection('settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-primary w-100" onclick="window.location.href='index.html#vehicles'">
+                    <i class="fas fa-plus-circle me-2"></i>Nouvelle Réservation
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Section Vue d'ensemble -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line me-2"></i>Vue d'ensemble</h2>
+                    <p class="text-muted">Bienvenue sur votre tableau de bord</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="stats-icon bg-primary">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 id="totalBookings">0</h3>
+                                <p>Réservations totales</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="stats-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 id="activeBookings">0</h3>
+                                <p>Réservations actives</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="stats-icon bg-warning">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 id="pendingBookings">0</h3>
+                                <p>En attente</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="stats-icon bg-info">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 id="totalSpent">0 FCFA</h3>
+                                <p>Total dépensé</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Statistiques de location</h5>
+                                <canvas id="bookingsChart" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Véhicules préférés</h5>
+                                <canvas id="vehiclesChart" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Bookings -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Réservations récentes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentBookingsList">
+                            <div class="text-center text-muted py-4">
+                                <i class="fas fa-inbox fs-1 mb-3"></i>
+                                <p>Aucune réservation pour le moment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Réservations -->
+            <section id="bookings" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check me-2"></i>Mes Réservations</h2>
+                    <button class="btn btn-primary" onclick="window.location.href='index.html#vehicles'">
+                        <i class="fas fa-plus me-2"></i>Nouvelle réservation
+                    </button>
+                </div>
+
+                <!-- Filtres -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <select class="form-select" id="bookingStatusFilter">
+                                    <option value="all">Tous les statuts</option>
+                                    <option value="en_attente">En attente</option>
+                                    <option value="confirmee">Confirmée</option>
+                                    <option value="en_cours">En cours</option>
+                                    <option value="terminee">Terminée</option>
+                                    <option value="annulee">Annulée</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="month" class="form-control" id="bookingMonthFilter">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-primary w-100" onclick="filterBookings()">
+                                    <i class="fas fa-filter me-2"></i>Filtrer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste des réservations -->
+                <div id="bookingsList">
+                    <div class="text-center text-muted py-5">
+                        <i class="fas fa-calendar-times fs-1 mb-3"></i>
+                        <p>Aucune réservation trouvée</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Profil -->
+            <section id="profile" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-edit me-2"></i>Mon Profil</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <div class="profile-avatar mb-3">
+                                    <i class="fas fa-user-circle fs-1 text-primary"></i>
+                                </div>
+                                <h5 id="profileName">Nom de l'utilisateur</h5>
+                                <p class="text-muted" id="profileEmail">email@example.com</p>
+                                <div class="badge bg-success mb-3">Compte actif</div>
+                                <p class="small text-muted">Membre depuis <span id="memberSince">2024</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Informations personnelles</h5>
+                                <form id="profileForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Prénom</label>
+                                            <input type="text" class="form-control" id="editFirstName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nom</label>
+                                            <input type="text" class="form-control" id="editLastName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="editEmail" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Téléphone</label>
+                                            <input type="tel" class="form-control" id="editPhone" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Date de naissance</label>
+                                            <input type="date" class="form-control" id="editBirthDate">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Adresse</label>
+                                            <input type="text" class="form-control" id="editAddress">
+                                        </div>
+                                        <div class="col-12">
+                                            <hr>
+                                            <h6>Modifier le mot de passe</h6>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nouveau mot de passe</label>
+                                            <input type="password" class="form-control" id="newPassword" placeholder="Laisser vide si inchangé">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Confirmer le mot de passe</label>
+                                            <input type="password" class="form-control" id="confirmNewPassword">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save me-2"></i>Enregistrer les modifications
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Favoris -->
+            <section id="favorites" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-heart me-2"></i>Véhicules Favoris</h2>
+                </div>
+
+                <div id="favoritesList" class="row g-4">
+                    <div class="col-12 text-center text-muted py-5">
+                        <i class="fas fa-heart-broken fs-1 mb-3"></i>
+                        <p>Aucun véhicule favori pour le moment</p>
+                        <button class="btn btn-primary" onclick="window.location.href='index.html#vehicles'">
+                            Découvrir nos véhicules
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Historique -->
+            <section id="history" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history me-2"></i>Historique des locations</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div id="historyList">
+                            <div class="text-center text-muted py-4">
+                                <i class="fas fa-clock fs-1 mb-3"></i>
+                                <p>Aucun historique disponible</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Paramètres -->
+            <section id="settings" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog me-2"></i>Paramètres</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Notifications</h5>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+                                    <label class="form-check-label" for="emailNotif">
+                                        Notifications par email
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="smsNotif" checked>
+                                    <label class="form-check-label" for="smsNotif">
+                                        Notifications par SMS
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="promoNotif">
+                                    <label class="form-check-label" for="promoNotif">
+                                        Offres promotionnelles
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Préférences</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Langue</label>
+                                    <select class="form-select">
+                                        <option value="fr" selected>Français</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Devise</label>
+                                    <select class="form-select">
+                                        <option value="XAF" selected>FCFA (XAF)</option>
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="USD">Dollar US (USD)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 BY_LocationAuto. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">
+                        <i class="fas fa-code me-1"></i>
+                        Développé par <span class="text-warning fw-bold">Basile lo Programmeur</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript personnalisé -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
